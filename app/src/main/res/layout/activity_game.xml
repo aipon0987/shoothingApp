@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/game_haikei2"
+    tools:context=".GameActivity"
+    tools:ignore="ExtraText">
+
+
+    //カウントダウンタイマー（3秒＋GO!）を入れる
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_gravity="center"
+        android:background="#A8000000">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="ボールに向かってタップ！"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/setsumei_text"
+            android:layout_gravity="center_horizontal"
+            android:text="3"
+            android:textColor="@color/white"
+            android:textSize="48sp"
+            android:textStyle="bold"
+            android:layout_marginTop="50dp"/>
+
+    </FrameLayout>
+
+    //画像をランダムな位置に配置
+    <ImageView
+        android:id="@+id/soccer"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/socker_ball"
+        android:layout_gravity="center"
+        android:visibility="gone"/>
+    　　
+
+</FrameLayout>
