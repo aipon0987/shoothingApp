@@ -1,4 +1,4 @@
-package com.example.ShoothingSoccer;
+package com.example;
 
 import android.content.Context;
 import android.content.Intent;
