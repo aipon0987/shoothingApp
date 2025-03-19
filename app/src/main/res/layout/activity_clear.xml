@@ -86,7 +86,7 @@
         android:backgroundTint="#A809AE"
         android:text="トップに戻る"
         android:textStyle="bold"
-        android:textSize="24sp"
+        android:textSize="20sp"
         android:textColor="@color/white"
         android:layout_gravity="bottom"
         android:layout_marginStart="200dp"/>

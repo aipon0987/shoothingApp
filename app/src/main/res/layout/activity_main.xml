@@ -19,7 +19,7 @@
         android:layout_height="match_parent"
         android:text="サッカー"
         android:textColor="#263AEA"
-        android:textSize="54sp"
+        android:textSize="42sp"
         android:textStyle="bold"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="50dp"/>
@@ -28,7 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:text="de"
-        android:textSize="54sp"
+        android:textSize="42sp"
         android:textColor="#263AEA"
         android:textStyle="bold"
         android:layout_gravity="center_horizontal"
@@ -39,7 +39,7 @@
         android:layout_height="match_parent"
         android:text="シューティング！"
         android:textColor="#263AEA"
-        android:textSize="50sp"
+        android:textSize="42sp"
         android:textStyle="bold"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="200dp"/>
