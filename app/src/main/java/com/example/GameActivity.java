@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.Display;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.WindowMetrics;
@@ -24,7 +26,7 @@ import com.example.myapplication.R;
 
 public class GameActivity extends AppCompatActivity {
 
-    private static final int DEFAULT_TIMER_VALUE = 30;
+    private static final int DEFAULT_TIMER_VALUE = 33;
     private static final long TOTAL_TIME = DEFAULT_TIMER_VALUE * 1000;
     private static final long INTERVAL_TIME = 1000;
 
@@ -33,6 +35,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private FrameLayout mainLayout;
+    private ImageView soccerBall;
     private CountDownTimer timer;
     private int count = 0;
 
@@ -47,43 +50,42 @@ public class GameActivity extends AppCompatActivity {
             return insets;
         });
 
+
         mainLayout = findViewById(R.id.main);
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View ballLayout = inflater.inflate(R.layout.soccer_ball_layout, null);
+        soccerBall = ballLayout.findViewById(R.id.soccer_ball);
+
 
         initTimer();
         timer.start();
-        addBall();
     }
 
-    private void addBall(){
-        int screenWidth = 0;
-        int screenHeight = 0;
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R) {
-            WindowManager wm = (WindowManager)getSystemService(WINDOW_SERVICE);
-            Display disp = wm.getDefaultDisplay();
-            Point realSize = new Point();
-            disp.getRealSize(realSize);
-            screenWidth = realSize.x;
-            screenHeight = realSize.y;
-        } else {
-            WindowMetrics windowMetrics = this.getWindowManager().getCurrentWindowMetrics();
-            screenWidth = windowMetrics.getBounds().width();
-            screenHeight = windowMetrics.getBounds().height();
-        }
-
-        Log.d("TAG", "screenWidth: " + screenWidth + ", screenHeight: " + screenHeight);
-
-        ImageView ballImage = new ImageView(this);
-        ballImage.setImageResource(R.drawable.soccer_ball);
-
-        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
-                FrameLayout.LayoutParams.WRAP_CONTENT,
-                FrameLayout.LayoutParams.WRAP_CONTENT
-        );
-        params.leftMargin = 200;
-        params.topMargin = 300;
-        mainLayout.addView(ballImage, params);
+    @Override
+    protected void onResume() {
+        super.onResume();
+        int pxSize = dpToPx(80);
+        int leftMargin = dpToPx(100);
+        int topMargin = dpToPx(100);
+        addSoccerBall(leftMargin, topMargin, pxSize);
 
     }
+
+    private void addSoccerBall(int leftMargin, int topMargin, int ballSize){
+        mainLayout.addView(soccerBall);
+        ViewGroup.LayoutParams params = soccerBall.getLayoutParams();
+        params.width = ballSize;
+        params.height = ballSize;
+        ((ViewGroup.MarginLayoutParams) params).leftMargin = leftMargin;
+        ((ViewGroup.MarginLayoutParams) params).topMargin = topMargin;
+        soccerBall.setLayoutParams(params);
+    }
+
+    private int dpToPx(int dp){
+        float density = getResources().getDisplayMetrics().density;
+        return (int) (dp * density + 0.5f);
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -96,6 +98,21 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void onTick(long millisUnitlFinished) {
                 long second = millisUnitlFinished / 1000;
+                Log.d("TAG", "OnTick" + second);
+
+                boolean isCountDown = (second - 30) >= 0;
+                if (isCountDown) {
+
+                    if (second -30 == 0) {
+
+                    }else  {
+
+                    }
+
+                } else {
+
+                }
+
             }
 
             @Override
