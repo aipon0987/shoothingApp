@@ -40,10 +40,12 @@
     </FrameLayout>
 
     <FrameLayout
+        android:id="@+id/timer_layout"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
         android:background="#A8000000"
-        android:layout_marginTop="40dp">
+        android:layout_marginTop="40dp"
+        android:visibility="gone">
 
         <TextView
             android:id="@+id/timer_text"

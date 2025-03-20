@@ -41,14 +41,17 @@ public class GameActivity extends AppCompatActivity {
 
     private FrameLayout mainLayout;
     private ImageView soccerBall;
-    private FrameLayout countDouwnLayout;
+    private FrameLayout countDownLayout;
     private TextView countDownTextView;
+    private FrameLayout timerLayout;
+    private TextView timerTextView;
     private CountDownTimer timer;
     private int count = 0;
     private int screenWidth = 0 ;
     private int screenHeight = 0;
     private int maxXPosition = 0;
     private int maxYPosition = 0;
+    private boolean isGameStarted = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,8 +66,10 @@ public class GameActivity extends AppCompatActivity {
 
 
         mainLayout = findViewById(R.id.main);
-        countDouwnLayout = findViewById(R.id.count_down_layout);
+        countDownLayout = findViewById(R.id.count_down_layout);
         countDownTextView = findViewById(R.id.count_down_text);
+        timerLayout = findViewById(R.id.timer_layout);
+        timerTextView = findViewById(R.id.timer_text);
 
         //画面サイズを取得する
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
@@ -105,20 +110,8 @@ public class GameActivity extends AppCompatActivity {
                 addSoccerBall(leftMargin, topMargin);
             }
         });
-
-
         initTimer();
         timer.start();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Random random = new Random();
-        int leftMargin = random.nextInt(maxXPosition);
-        int topMargin = random.nextInt(maxYPosition);
-        addSoccerBall(leftMargin, topMargin);
-
     }
 
     private void addSoccerBall(int leftMargin, int topMargin){
@@ -158,12 +151,24 @@ public class GameActivity extends AppCompatActivity {
 
                 boolean isCountDown = (second - 30) >= 0;
                 if (second -30 == 0) {
-
+                    timerLayout.setVisibility(View.GONE);
+                    countDownLayout.setVisibility(View.VISIBLE);
                     countDownTextView.setText("スタート");
-
-                }else  if (second - 30 >= 0){
-
+                }else  if (second - 30 > 0){
+                    timerLayout.setVisibility(View.GONE);
+                    countDownLayout.setVisibility(View.VISIBLE);
+                    countDownTextView.setText(String.valueOf(second - 30));
                 } else {
+                    if (!isGameStarted) {
+                        isGameStarted = true;
+                        timerLayout.setVisibility(View.VISIBLE);
+                        countDownLayout.setVisibility(View.GONE);
+                        Random random = new Random();
+                        int leftMargin = random.nextInt(maxXPosition);
+                        int topMargin = random.nextInt(maxYPosition);
+                        addSoccerBall(leftMargin, topMargin);
+                    }
+                    timerTextView.setText(String.valueOf(second));
 
                 }
 
